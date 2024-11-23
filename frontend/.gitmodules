@@ -1,0 +1,3 @@
+[submodule "secret-santa-build"]
+	path = secret-santa-build
+	url = .\\secret-santa-build\\
