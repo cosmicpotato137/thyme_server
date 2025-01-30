@@ -25,6 +25,8 @@ def printrun_view(request):
                 process.stdin.flush()
                 process.wait(1)
                 process.stdin.write(command + "\n")
+                process.stdin.flush()
+                process.wait(1)
                 stdout, stderr = process.communicate(timeout=10)
                 response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
             except subprocess.TimeoutExpired:
