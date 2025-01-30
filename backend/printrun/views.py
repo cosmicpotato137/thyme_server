@@ -10,9 +10,6 @@ from django.shortcuts import render
 
 def printrun_view(request):
     response = None
-    current_user = getpass.getuser()  # Get the current user
-    print(f"Current user: {current_user}")  # Print the current user to the console or log
-
     if request.method == "POST":
         command = request.POST.get("command")
         if command:
@@ -24,12 +21,9 @@ def printrun_view(request):
                     stderr=subprocess.PIPE,
                     text=True
                 )
-                stdout, stderr = process.communicate(input="connect", timeout=5)
-                print(f"stdout: {stdout}")
-                stdout, stderr = process.communicate(input=command, timeout=5)
+                input = f"connect\n{command}\nexit"
+                stdout, stderr = process.communicate(input=input, timeout=30)
                 response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
-                stdout, stderr = process.communicate(input="exit", timeout=5)
-                print(f"stdout: {stdout}")
             except subprocess.TimeoutExpired:
                 process.kill()
                 stdout, stderr = process.communicate()
