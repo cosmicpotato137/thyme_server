@@ -22,7 +22,7 @@ def printrun_view(request):
                     text=True
                 )
                 process.wait(2)
-                process.stdin.write("connect\n")
+                process.stdin.write(command + "\n")
                 process.stdin.flush()
                 process.wait(2)
                 stdout, stderr = process.communicate()
