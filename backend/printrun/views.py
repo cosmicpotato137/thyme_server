@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import subprocess
 import traceback
+import os
 
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -16,13 +17,22 @@ def printrun_view(request):
         if command:
             try:
                 print("here")
-                process = subprocess.Popen(
-                    ["pronsole"],
-                    stdin=subprocess.PIPE,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.PIPE,
-                    text=True
-                )
+                if os.name == 'nt':  # Check if the OS is Windows
+                    process = subprocess.Popen(
+                        ["pronsole"],
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        text=True
+                    )
+                else:  # Assume the OS is Linux/Unix
+                    process = subprocess.Popen(
+                        ["sudo", "pronsole"],
+                        stdin=subprocess.PIPE,
+                        stdout=subprocess.PIPE,
+                        stderr=subprocess.PIPE,
+                        text=True
+                    )
                 stdout, stderr = process.communicate(input=command)
                 response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
             except Exception as e:
