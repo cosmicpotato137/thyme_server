@@ -24,7 +24,7 @@ def printrun_view(request):
                 process.stdin.write("connect\n")
                 print("here")
                 process.stdin.flush()
-                process.wait(2)
+                process.wait(10)
                 if "Printer is now online" in stdout:
                     print("here")
                     input = f"{command}\n"
