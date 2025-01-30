@@ -1,3 +1,9 @@
+# Django specific
+*.log
+*.pot
+*.pyc
+backend/staticfiles/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
