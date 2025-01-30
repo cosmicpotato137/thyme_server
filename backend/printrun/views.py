@@ -7,7 +7,7 @@ import os
 from django.shortcuts import render
 
 
-def pronsole_view(request):
+def printrun_view(request):
     response = None
     if request.method == "POST":
         command = request.POST.get("command")
