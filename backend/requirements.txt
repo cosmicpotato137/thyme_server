@@ -1,0 +1,13 @@
+# Core
+django==4.2.9
+python-dotenv==1.0.1
+django-quill-editor==0.1.40
+
+# Tools
+djangorestframework==3.14.0
+django-api-generator==1.0.17
+django-debug-toolbar==4.2.0
+django-extensions==3.2.3
+numpy==2.1.1
+pandas==2.2.3
+
