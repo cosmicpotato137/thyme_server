@@ -21,16 +21,11 @@ def printrun_view(request):
                     stderr=subprocess.PIPE,
                     text=True
                 )
+                process.wait(2)
                 process.stdin.write("connect\n")
-                print("here")
-                process.wait(5)
-                if "Printer is now online" in stdout:
-                    print("here")
-                    input = f"{command}\n"
-                    process.stdin.write(input)
-                    process.stdin.flush()
-                print("here")
-                stdout, stderr = process.communicate(input="exit", timeout=30)
+                process.stdin.flush()
+                process.wait(2)
+                stdout, stderr = process.communicate()
                 response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
             except subprocess.TimeoutExpired:
                 process.kill()
