@@ -24,8 +24,12 @@ def printrun_view(request):
                     stderr=subprocess.PIPE,
                     text=True
                 )
-                stdout, stderr = process.communicate(input="connect\n" + command + "\nexit\n", timeout=30) 
+                stdout, stderr = process.communicate(input="connect", timeout=5)
+                print(f"stdout: {stdout}")
+                stdout, stderr = process.communicate(input=command, timeout=5)
                 response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
+                stdout, stderr = process.communicate(input="exit", timeout=5)
+                print(f"stdout: {stdout}")
             except subprocess.TimeoutExpired:
                 process.kill()
                 stdout, stderr = process.communicate()
