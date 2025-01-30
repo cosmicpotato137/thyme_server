@@ -1,0 +1,16 @@
+<body>
+    <h1>Execute Pronsole Commands</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="command" value="help">Help</button>
+        <button type="submit" name="command" value="connect">Connect</button>
+        <button type="submit" name="command" value="disconnect">Disconnect</button>
+        <button type="submit" name="command" value="home">Home</button>
+        <button type="submit" name="command" value="print">Print</button>
+        <!-- Add more buttons as needed -->
+    </form>
+    {% if response %}
+    <h2>Response:</h2>
+    <div>{{ response|safe }}</div>
+    {% endif %}
+</body>
