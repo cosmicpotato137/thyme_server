@@ -14,7 +14,7 @@ def printrun_view(request):
         if command:
             try:
                 env = os.environ.copy()
-                env['PRONSOLE_CONFIG_DIR'] = '/path/to/accessible/directory'
+                env['PRONSOLE_CONFIG_DIR'] = '~'
                 process = subprocess.Popen(
                     ["pronsole"],
                     stdin=subprocess.PIPE,
