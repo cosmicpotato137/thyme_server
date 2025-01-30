@@ -1,5 +1,5 @@
 """
-ASGI config for super_secret_santa_selector_v2 project.
+ASGI config for thyme_server project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'super_secret_santa_selector_v2.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'thyme_server.settings')
 
 application = get_asgi_application()
