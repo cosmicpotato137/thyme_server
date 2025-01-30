@@ -27,9 +27,7 @@ def printrun_view(request):
                 if "Connected" in stdout:
                     input = f"{command}\nexit"
                     stdout, stderr = process.communicate(input=input, timeout=30)
-                    response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
-                else:
-                    response = f"<pre>Failed to connect.</pre><pre>{stderr}</pre>"
+                response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
             except subprocess.TimeoutExpired:
                 process.kill()
                 stdout, stderr = process.communicate()
