@@ -3,7 +3,13 @@ from django.http import HttpResponse
 import subprocess
 import traceback
 
-def pronsole_view(request):
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+
+
+def printrun_view(request):
     response = None
     if request.method == "POST":
         command = request.POST.get("command")

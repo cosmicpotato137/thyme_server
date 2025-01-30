@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-sukg_%o+t+8gwyr616nmg_3qem8vw3g(y-unpy&kddy9n)eb_5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "paprika.ddns.net"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "thyme"]
 
 
 # Application definition

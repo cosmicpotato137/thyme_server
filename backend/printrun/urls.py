@@ -2,5 +2,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.pronsole_view, name='printrun'),
+    path('', views.printrun_view, name='printrun'),
 ]
