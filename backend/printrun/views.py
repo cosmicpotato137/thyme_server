@@ -16,13 +16,21 @@ def printrun_view(request):
     if request.method == "POST":
         command = request.POST.get("command")
         if command:
-            process = subprocess.Popen(
-                ["pronsole"],
-                stdin=subprocess.PIPE,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
-            )
-            stdout, stderr = process.communicate(input=command)
-            response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
+            try:
+                process = subprocess.Popen(
+                    ["pronsole"],
+                    stdin=subprocess.PIPE,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    text=True
+                )
+                stdout, stderr = process.communicate(input=command, timeout=30)  # Set a timeout of 30 seconds
+                response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
+            except subprocess.TimeoutExpired:
+                process.kill()
+                stdout, stderr = process.communicate()
+                response = f"<pre>Command timed out.</pre><pre>{stderr}</pre>"
+            except Exception as e:
+                traceback_str = ''.join(traceback.format_tb(e.__traceback__))
+                response = f"<pre>An error occurred: {str(e)}</pre><pre>{traceback_str}</pre>"
     return render(request, "pronsole.html", {"response": response})
