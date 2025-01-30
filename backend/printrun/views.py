@@ -30,7 +30,7 @@ def printrun_view(request):
             except subprocess.TimeoutExpired:
                 process.kill()
                 stdout, stderr = process.communicate()
-                response = f"<pre>Command timed out.</pre><pre>{stderr}</pre>"
+                response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
             except Exception as e:
                 traceback_str = ''.join(traceback.format_tb(e.__traceback__))
                 response = f"<pre>An error occurred: {str(e)}</pre><pre>{traceback_str}</pre>"
