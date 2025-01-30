@@ -24,7 +24,7 @@ def printrun_view(request):
                 input = "connect\n"
                 stdout, stderr = process.communicate(input=input, timeout=30)
                 
-                if "Connected" in stdout:
+                if "Printer is now online" in stdout:
                     input = f"{command}\nexit"
                     stdout, stderr = process.communicate(input=input, timeout=30)
                 response = f"<pre>{stdout}</pre><pre>{stderr}</pre>"
