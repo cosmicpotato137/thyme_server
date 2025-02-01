@@ -7,6 +7,9 @@
         <button type="submit" name="command" value="disconnect">Disconnect</button>
         <button type="submit" name="command" value="home">Home</button>
         <button type="submit" name="command" value="print">Print</button>
+        <label for="gcodeFile">Upload G-code File:</label>
+        <input type="file" id="gcodeFile" name="gcodeFile" accept=".gcode">
+        <button type="submit" name="command" value="upload">Upload</button>
         <!-- Add more buttons as needed -->
     </form>
     {% if response %}
