@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-sukg_%o+t+8gwyr616nmg_3qem8vw3g(y-unpy&kddy9n)eb_5"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", False).lower() in ("true", "1", "yes")
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "thyme", "paprika.ddns.net"]
 
@@ -42,11 +47,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "publicapp",
-    "printrun",
+    "corsheaders",
+    "rest_framework",
+    "api",
+    "words",
+    "terminal",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -54,6 +63,15 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+
+CORS_ALLOW_ALL_ORIGINS = DEBUG
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://thyme",
+    "https://paprika.ddns.net",
 ]
 
 ROOT_URLCONF = "thyme_server.urls"
@@ -146,7 +164,7 @@ LOGGING = {
     "handlers": {
         "file": {
             "level": "DEBUG",
-            "class": "logging.handlers.TimedRotatingFileHandler",
+            "class": "concurrent_log_handler.ConcurrentTimedRotatingFileHandler",
             "filename": os.path.join(BASE_DIR, "logs/thyme_server.log"),
             "when": "midnight",
             "backupCount": 7,

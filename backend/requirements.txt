@@ -10,6 +10,6 @@ django-debug-toolbar==4.2.0
 django-extensions==3.2.3
 numpy==2.1.1
 pandas==2.2.3
-
-Printrun==2.2.0
-
+django-cors-headers==4.7.0
+dotenv
+concurrent-log-handler==0.9.26

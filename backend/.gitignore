@@ -3,7 +3,7 @@
 *.log
 *.pot
 *.pyc
-backend/staticfiles/
+/staticfiles/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

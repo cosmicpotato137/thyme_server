@@ -1,90 +1,43 @@
-import "./App.css";
-import { useState } from "react";
-import { santaSelector } from "./scripts/SantaSelector";
-
-import GroupMaker from "./GroupMaker";
-import PairViewer from "./PairViewer";
+import React, { useEffect, useRef, useState } from "react";
+import Terminal from "./Terminal";
 
 function App() {
-  const [groups, setGroups] = useState([]);
-  const [pairings, setPairings] = useState([]);
-  const [showPairings, setShowPairings] = useState(false);
+  const terminalRef = useRef(null);
+  const [screenHeight, setScreenHeight] = useState(window.innerHeight);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  const updateGroup = (groupID, newgroup) => {
-    // Create a new array with the updated subarray
-    const updatedArray = [
-      ...groups.slice(0, groupID), // Copy arrays before the target
-      newgroup, // Updated subarray
-      ...groups.slice(groupID + 1), // Copy arrays after the target
-    ];
-    setGroups(updatedArray);
-  };
+  useEffect(() => {
+    // Reset body styles
+    document.body.style.margin = "0";
+    document.body.style.padding = "0";
+    document.body.style.height = "100vh";
+    document.body.style.overflow = "hidden";
 
-  const removeGroup = (groupID) => {
-    const newgroups = [
-      ...groups.slice(0, groupID),
-      ...groups.slice(groupID + 1),
-    ];
-    setGroups(newgroups);
-  };
+    const handleResize = () => {
+      setScreenHeight(window.innerHeight);
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  // Function to update a specific subarray
-  const updateMember = (groupID, memberID, member) => {
-    // Find the index of the subarray
-    const newgroup = [
-      ...groups[groupID].slice(0, memberID),
-      member,
-      ...groups[groupID].slice(memberID + 1),
-    ];
-    updateGroup(groupID, newgroup);
-    return member;
-  };
-
-  const addMember = (groupID, member) => {
-    const newgroup = [...groups[groupID], member];
-
-    updateGroup(groupID, newgroup);
-  };
-
-  const removeMember = (groupID, memberID) => {
-    const newgroup = [
-      ...groups[groupID].slice(0, memberID),
-      ...groups[groupID].slice(memberID + 1),
-    ];
-    updateGroup(groupID, newgroup);
-  };
+  const padding = 5;
 
   return (
-    <div className="App">
-      <h1>Super Secret Santa Selector</h1>
-      {!showPairings && (
-        <GroupMaker
-          groups={groups}
-          updateGroup={updateGroup}
-          updateMember={updateMember}
-          addMember={addMember}
-          removeGroup={removeGroup}
-          removeMember={removeMember}
-          onFindMatches={() => {
-            try {
-              setPairings(santaSelector(groups));
-            } catch (error) {}
-            setShowPairings(true);
-          }}
-          setGroups={setGroups}
-        ></GroupMaker>
-      )}
-      {showPairings && (
-        <PairViewer
-          pairings={pairings}
-          setShowPairings={setShowPairings}
-          onRandomizeMatches={() => {
-            try {
-              setPairings(santaSelector(groups));
-            } catch (error) {}
-          }}
-        ></PairViewer>
-      )}
+    <div style={{ margin: 0, padding: 0, height: "100vh", width: "100vw" }}>
+      <Terminal
+        inputColor="green"
+        errorColor="red"
+        backgroundColor="black"
+        barColor="black"
+        msg="Welcome to Terminal.js in React!"
+        ref={terminalRef}
+        style={{
+          height: `${screenHeight - padding * 2}px`,
+          width: `${screenWidth - padding * 2}px`,
+          padding: `${padding}px`,
+        }}
+      />
     </div>
   );
 }

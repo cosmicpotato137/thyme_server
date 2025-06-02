@@ -1,0 +1,166 @@
+INFO 2025-01-31 23:00:22,277 autoreload Watching for file changes with StatReloader
+INFO 2025-01-31 23:00:22,277 autoreload Watching for file changes with StatReloader
+INFO 2025-01-31 23:00:42,146 basehttp "GET / HTTP/1.1" 200 415
+INFO 2025-01-31 23:00:42,146 basehttp "GET / HTTP/1.1" 200 415
+INFO 2025-05-25 17:20:30,385 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:20:30,385 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:20:40,885 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:20:40,885 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:20:45,933 basehttp "GET / HTTP/1.1" 200 10664
+INFO 2025-05-25 17:20:45,933 basehttp "GET / HTTP/1.1" 200 10664
+WARNING 2025-05-25 17:20:46,189 log Not Found: /favicon.ico
+WARNING 2025-05-25 17:20:46,189 log Not Found: /favicon.ico
+WARNING 2025-05-25 17:20:46,189 basehttp "GET /favicon.ico HTTP/1.1" 404 2116
+WARNING 2025-05-25 17:20:46,189 basehttp "GET /favicon.ico HTTP/1.1" 404 2116
+WARNING 2025-05-25 17:20:53,441 log Not Found: /api/status
+WARNING 2025-05-25 17:20:53,441 log Not Found: /api/status
+WARNING 2025-05-25 17:20:53,457 basehttp "GET /api/status HTTP/1.1" 404 2113
+WARNING 2025-05-25 17:20:53,457 basehttp "GET /api/status HTTP/1.1" 404 2113
+INFO 2025-05-25 17:21:20,253 autoreload C:\Users\imacs\Documents\Code\thyme_server\backend\thyme_server\urls.py changed, reloading.
+INFO 2025-05-25 17:21:20,253 autoreload C:\Users\imacs\Documents\Code\thyme_server\backend\thyme_server\urls.py changed, reloading.
+INFO 2025-05-25 17:21:21,028 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:21:21,028 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:23:02,314 autoreload C:\Users\imacs\Documents\Code\thyme_server\backend\api\urls.py changed, reloading.
+INFO 2025-05-25 17:23:02,314 autoreload C:\Users\imacs\Documents\Code\thyme_server\backend\api\urls.py changed, reloading.
+INFO 2025-05-25 17:23:03,065 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:23:03,065 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:23:17,311 basehttp "GET /api/status HTTP/1.1" 301 0
+INFO 2025-05-25 17:23:17,311 basehttp "GET /api/status HTTP/1.1" 301 0
+ERROR 2025-05-25 17:23:17,467 log Internal Server Error: /api/status/
+Traceback (most recent call last):
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_status() takes 0 positional arguments but 1 was given
+ERROR 2025-05-25 17:23:17,467 log Internal Server Error: /api/status/
+Traceback (most recent call last):
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\imacs\Documents\Code\thyme_server\backend\venv\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: get_status() takes 0 positional arguments but 1 was given
+ERROR 2025-05-25 17:23:17,472 basehttp "GET /api/status/ HTTP/1.1" 500 100781
+ERROR 2025-05-25 17:23:17,472 basehttp "GET /api/status/ HTTP/1.1" 500 100781
+INFO 2025-05-25 17:23:31,830 autoreload C:\Users\imacs\Documents\Code\thyme_server\backend\api\views.py changed, reloading.
+INFO 2025-05-25 17:23:31,830 autoreload C:\Users\imacs\Documents\Code\thyme_server\backend\api\views.py changed, reloading.
+INFO 2025-05-25 17:23:32,580 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:23:32,580 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:23:34,842 basehttp "GET /api/status/ HTTP/1.1" 200 5337
+INFO 2025-05-25 17:23:34,842 basehttp "GET /api/status/ HTTP/1.1" 200 5337
+INFO 2025-05-25 17:23:35,218 basehttp "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+INFO 2025-05-25 17:23:35,220 basehttp "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO 2025-05-25 17:23:35,218 basehttp "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+INFO 2025-05-25 17:23:35,220 basehttp "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+INFO 2025-05-25 17:23:35,222 basehttp "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385
+INFO 2025-05-25 17:23:35,230 basehttp "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+INFO 2025-05-25 17:23:35,222 basehttp "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385
+INFO 2025-05-25 17:23:35,230 basehttp "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+INFO 2025-05-25 17:23:35,240 basehttp "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3597
+INFO 2025-05-25 17:23:35,240 basehttp "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3597
+INFO 2025-05-25 17:23:35,252 basehttp "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1719
+INFO 2025-05-25 17:23:35,252 basehttp "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1719
+INFO 2025-05-25 17:23:35,263 basehttp "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO 2025-05-25 17:23:35,263 basehttp "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+INFO 2025-05-25 17:23:35,268 basehttp "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+INFO 2025-05-25 17:23:35,268 basehttp "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+INFO 2025-05-25 17:23:35,281 basehttp "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO 2025-05-25 17:23:35,281 basehttp "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+INFO 2025-05-25 17:23:35,284 basehttp "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+INFO 2025-05-25 17:23:35,284 basehttp "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+INFO 2025-05-25 17:23:35,298 basehttp "GET /static/rest_framework/js/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-05-25 17:23:35,298 basehttp "GET /static/rest_framework/js/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+INFO 2025-05-25 17:44:57,930 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:44:57,934 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:44:57,930 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:44:57,934 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:00,089 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:00,089 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:00,104 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:00,104 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:46,985 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:46,985 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:47,006 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:47,006 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:57,860 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:57,860 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:57,872 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:45:57,872 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:48:33,665 autoreload C:\Users\imacs\Documents\Code\thyme_server\backend\thyme_server\settings.py changed, reloading.
+INFO 2025-05-25 17:48:33,665 autoreload C:\Users\imacs\Documents\Code\thyme_server\backend\thyme_server\settings.py changed, reloading.
+INFO 2025-05-25 17:48:34,681 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:48:34,681 autoreload Watching for file changes with StatReloader
+INFO 2025-05-25 17:48:45,239 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:48:45,239 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:48:45,243 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:48:45,243 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:02,421 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:02,421 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:02,430 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:02,430 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:03,837 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:03,837 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:03,846 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:03,846 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:19,828 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:19,828 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:19,851 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:19,851 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:21,791 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:21,791 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:21,824 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:49:21,824 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:57:52,647 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:57:52,649 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:57:52,647 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 17:57:52,649 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 18:01:17,925 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 18:01:17,931 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 18:01:17,925 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 18:01:17,931 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 18:02:43,977 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 18:02:43,977 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 18:02:43,988 basehttp "GET /api/status/ HTTP/1.1" 200 30
+INFO 2025-05-25 18:02:43,988 basehttp "GET /api/status/ HTTP/1.1" 200 30
