@@ -4,6 +4,9 @@
 *.pot
 *.pyc
 /staticfiles/
+log/
+logs/
+*.lock
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
