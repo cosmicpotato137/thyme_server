@@ -12,23 +12,47 @@ def assert_valid_language(language: str):
         )
 
 
-def create_or_update_word(word: models.Word):
-    word.word = word.word.lower()
+def update_or_create_word(word, language, strength=0, last_seen=None):
+    """Update or create a word in the database."""
+    assert_valid_language(language)
+    defaults = {
+        "strength": strength,
+    }
+    if last_seen:
+        defaults["last_seen"] = last_seen
 
-    # Check if word has a valid language
-    assert_valid_language(word.language)
+    word, created = models.Word.objects.update_or_create(
+        word=word,
+        language=language,
+        defaults=defaults,
+    )
 
-    max_difficulty = get_max_difficulty(word.language, exclude=word)
-    if word.difficulty > max_difficulty:
-        word.difficulty = max_difficulty + 1
+    return word
+
+
+def remove_word(word, language):
+    """Remove a word from the database."""
+    assert_valid_language(language)
+    try:
+        word_instance = models.Word.objects.get(word=word, language=language)
+        word_instance.delete()
+    except models.Word.DoesNotExist:
+        raise ValueError(f"Word '{word}' in language '{language}' does not exist.")
+
+
+def create_synonym(word: models.Word, synonym: models.Word):
+    """Create a synonym relationship between two words."""
+    if word == synonym:
+        raise ValueError("A word cannot be a synonym of itself.")
+
+    # Ensure both words are saved in the database
+    try:
         word.save()
-    else:
-        models.Word.objects.filter(
-            language=word.language, difficulty__gte=word.difficulty
-        ).exclude(language=word.language, word=word.word).update(
-            difficulty=F("difficulty") + 1
-        )
-        word.save()
+        synonym.save()
+    except Exception as e:
+        pass
+
+    word.synonyms.add(synonym)
 
 
 def sigmoid(x, a, b):
@@ -47,20 +71,7 @@ def inc_strength(word: models.Word, ammount=1):
         word.save()
 
 
-def get_max_difficulty(language, exclude: models.Word = None):
-    query = models.Word.objects.filter(language=language)
-    if exclude and exclude.id:
-        query.exclude(id=exclude.id)
-    if not query.exists():
-        return 0
-
-    return query.aggregate(Max("difficulty"))["difficulty__max"]
-
-
 def set_probability(word: models.Word):
-    # Aggregate the difficulties of all words in the same language
-    p = 2 - word.difficulty / get_max_difficulty(word.language)
-
     # Show weaker words first
     p *= sigmoid(word.strength, 1000, 0.5)
 
@@ -78,18 +89,12 @@ def set_probability(word: models.Word):
     word.save()
 
 
-def get_weighted_word(language=None, difficulty_range=None):
+def get_weighted_word(language=None, pk_range=None):
     query = models.Word.objects.all()
     if language:
         query = query.filter(language=language)
-    if difficulty_range:
-        # Normalize difficulty from 0-10
-        max_difficulty = get_max_difficulty(language)
-        normalized_range = (
-            difficulty_range[0] * max_difficulty // 10,
-            difficulty_range[1] * max_difficulty // 10,
-        )
-        query = query.filter(difficulty__range=normalized_range)
+    if pk_range:
+        query = query.filter(pk__range=pk_range)
     if not query.exists():
         return models.Word(word="Oops")
 

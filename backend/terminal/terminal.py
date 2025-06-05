@@ -62,13 +62,19 @@ class Command:
                 if name == "self":
                     continue
                 # Try to infer type from annotation, or None if not annotated
-                datatype = (
-                    param.annotation
-                    if param.annotation != inspect.Parameter.empty
-                    else None
-                )
+                if param.annotation != inspect.Parameter.empty:
+                    datatype = param.annotation
+                else:
+                    raise ValueError(
+                        "Parameter type must be specified or None for flags."
+                    )
                 positional = param.default == inspect.Parameter.empty
                 name = param.name
+                ailias = None
+                if not filter(lambda x: x.ailias == name[0], self.params):
+                    # Check if the first character can be used as an alias
+                    ailias = name[0] if len(name) > 1 else None
+
                 desc = ""
                 # If there's a docstring, try to extract parameter descriptions (optional)
                 if func.__doc__:
@@ -79,7 +85,11 @@ class Command:
                             break
                 self.params.append(
                     Parameter(
-                        name, description=desc, positional=positional, datatype=datatype
+                        name,
+                        description=desc,
+                        positional=positional,
+                        datatype=datatype,
+                        ailias=ailias,
                     )
                 )
 
@@ -253,6 +263,47 @@ class Terminal(InputHandler):
     def help_statement(self):
         """List all attached commands."""
         return "\n".join(cmd.help_statement() for cmd in self._commands.values())
+
+    def create_relation(
+        self,
+        input_context_handler,
+        child,
+        command_name,
+        command_description="",
+        welcome_message="",
+    ):
+        """
+        Create a relation between two terminals with a command.
+        """
+
+        def switch_terminals():
+            """
+            Switch to the child terminal.
+            """
+            input_context_handler.push_handler(child)
+            return welcome_message
+
+        def exit_terminal():
+            """
+            Exit the child terminal and return to the parent terminal.
+            """
+            if input_context_handler.pop_handler() is None:
+                raise ValueError("No terminal to exit from")
+
+        self.attach_command(
+            Command(
+                switch_terminals,
+                name=command_name,
+                description=command_description,
+            )
+        )
+        child.attach_command(
+            Command(
+                exit_terminal,
+                name="exit",
+                description="Exit the current terminal",
+            )
+        )
 
 
 default_terminal = Terminal(

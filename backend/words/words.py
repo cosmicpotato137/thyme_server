@@ -1,19 +1,18 @@
 from terminal.terminal import Command, Parameter, Terminal, default_terminal
 from words.models import Word
-from words.database_functions import create_or_update_word, assert_valid_language
+from words.database_functions import (
+    update_or_create_word,
+    assert_valid_language,
+    remove_word,
+)
 
 
 words_terminal = Terminal(prompt="words> ")
 
 
-def add(word: str, language: str = "en", difficulty: int = 0):
-    w = Word(
-        word=word,
-        language=language,
-        difficulty=difficulty,
-    )
+def add(word: str, language: str = "en"):
     try:
-        create_or_update_word(w)
+        update_or_create_word(word, language)
     except Exception as e:
         return f"Error adding word: {e}"
 
@@ -22,10 +21,9 @@ def remove(word: str, language: str = None):
     """Remove a word from the database."""
     if language:
         try:
-            word_obj = Word.objects.get(word=word, language=language)
-            word_obj.delete()
-        except Word.DoesNotExist:
-            return f"Word '{word}' not found in the database."
+            remove_word(word, language)
+        except Exception as e:
+            return e
     else:
         word_objs = Word.objects.filter(word=word)
         if not word_objs.exists():
@@ -48,18 +46,56 @@ def list(language: str = None):
     if language:
         words = words.filter(language=language)
 
-    words = words.order_by("difficulty", "word")
+    words = words.order_by("word", "language", "strength")
 
     if not words.exists():
         return f"No words found for language '{language}'."
 
     return "\n".join(
-        f"{word.word} ({word.language}, Difficulty: {word.difficulty})"
-        for word in words
+        f"{word.word} ({word.language}, {word.strength})" for word in words
     )
 
 
+def list_synonyms(language: str, translation_language: str, max: int = 10):
+    """List all synonyms for words in a specific language, showing their synonyms in another language."""
+    assert_valid_language(language)
+    assert_valid_language(translation_language)
+
+    words = Word.objects.filter(language=language)
+    results = []
+    for word in words:
+        synonyms = word.synonyms.filter(language=translation_language)
+        for synonym in synonyms:
+            results.append(f"{word.word} -> {synonym.word}")
+            if len(results) >= max:
+                break
+        if len(results) >= max:
+            break
+
+    if not results:
+        return f"No synonyms found for language '{language}' and translation language '{translation_language}'."
+
+    return "\n".join(results)
+
+
+def update(word: str, new_word: str, language: str = "en"):
+    """Update a word in the database."""
+    try:
+        word_obj = Word.objects.get(word=word, language=language)
+        word_obj.word = new_word
+        word_obj.save()
+        return f"Word '{word}' updated to '{new_word}' in language '{language}'."
+    except Word.DoesNotExist:
+        return f"Word '{word}' not found in language '{language}'."
+    except Exception as e:
+        return f"Error updating word: {e}"
+
+
 words_commands = [
+    Command(
+        list_synonyms,
+        description="List all synonyms for a given word in a specific language.",
+    ),
     Command(
         add,
         description="Add or update a word in the database.",
@@ -71,13 +107,6 @@ words_commands = [
                 "The language of the word.",
                 required=False,
                 ailias="l",
-            ),
-            Parameter(
-                "difficulty",
-                int,
-                "The difficulty level of the word.",
-                required=False,
-                ailias="d",
             ),
         ],
     ),

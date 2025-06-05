@@ -38,34 +38,3 @@ class InputContextHandler:
 
 
 input_context_handler = InputContextHandler([default_terminal])
-
-
-def mount_context_switchers():
-    def push_words_context():
-        """
-        Start the words game.
-        """
-        input_context_handler.push_handler(words_terminal)
-        return "Words game started. Type 'exit' to stop the game."
-
-    default_terminal.attach_command(
-        Command(
-            push_words_context,
-            name="words",
-            description="Start the words game.",
-        )
-    )
-
-    def exit():
-        """
-        Stop the words game.
-        """
-        input_context_handler.pop_handler()
-        return "Words game stopped. You can now use other commands."
-
-    words_terminal.attach_command(
-        Command(
-            exit,
-            description="Leave the words terminal.",
-        ),
-    )

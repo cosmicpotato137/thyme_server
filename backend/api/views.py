@@ -2,10 +2,9 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from terminal.input_handler_context import (
-    input_context_handler,
-    mount_context_switchers,
-)
+from terminal.input_context_handler import input_context_handler
+from words.words import words_terminal
+from terminal.terminal import default_terminal
 from terminal.models import CommandHistory
 from django.utils.timezone import now
 
@@ -86,7 +85,13 @@ def terminal(request):
     API endpoint to return a simple message for terminal access.
     This can be used to check if the API is accessible from a terminal.
     """
-    mount_context_switchers()
+    default_terminal.create_relation(
+        input_context_handler,
+        words_terminal,
+        "words",
+        "Words study service.",
+        "Welcome to the words terminal. Type 'help' for assistance.",
+    )
 
     message, completed = input_context_handler.handle_input(
         request.data.get("command", "")

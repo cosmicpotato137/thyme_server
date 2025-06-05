@@ -1,13 +1,5 @@
 from rest_framework import serializers
-from .models import Word, Synonym, Languages
-
-
-class SynonymSerializer(serializers.ModelSerializer):
-    synonym = serializers.StringRelatedField()
-
-    class Meta:
-        model = Synonym
-        fields = "__all__"
+from .models import Word, Languages
 
 
 class WordSerializer(serializers.ModelSerializer):

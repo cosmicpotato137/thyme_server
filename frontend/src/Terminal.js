@@ -297,61 +297,55 @@ const Terminal = forwardRef(
           if (index === arr.length - 1) {
             lastLineRef.current = s;
             return (
-              <div
+              <span
                 key={index}
-                style={{ display: "flex", alignItems: "center" }}
+                style={{
+                  backgroundColor: backgroundColor,
+                  color: inputColor,
+                  border: "none",
+                  outline: "none",
+                  padding: "0px",
+                  margin: "0px",
+                  fontSize: "inherit",
+                  fontFamily: "inherit",
+                  lineHeight: "18.5px",
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "break-all",
+                  resize: "none",
+                  cursor: "default",
+                  zIndex: 2,
+                }}
+                tabIndex={0}
               >
-                <span
-                  style={{
-                    backgroundColor: backgroundColor,
-                    color: inputColor,
-                    border: "none",
-                    outline: "none",
-                    padding: "0px",
-                    margin: "0px",
-                    fontSize: "inherit",
-                    fontFamily: "inherit",
-                    lineHeight: "18.5px",
-                    whiteSpace: "pre-wrap",
-                    wordBreak: "break-all",
-                    resize: "none",
-                    cursor: "default",
-                    zIndex: 2,
-                  }}
-                  tabIndex={0}
-                >
-                  {s}
-                  {
-                    // Render command with cursor at caretPos
-                    (() => {
-                      const before = command.slice(0, caretPos);
-                      const after = command.slice(caretPos);
-                      return (
-                        <>
-                          <span>{before}</span>
-                          <span
-                            style={{
-                              display: "inline-block",
-                              backgroundColor: cursorVisible
-                                ? inputColor
-                                : backgroundColor,
-                              color: cursorVisible
-                                ? backgroundColor
-                                : inputColor,
-                            }}
-                          >
-                            {after.length > 0 ? after[0] : "\u00A0"}
-                          </span>
-                          <span>{after.slice(1)}</span>
-                          {command.length === 0 && (
-                            <span style={{ opacity: 0.5 }}>&nbsp;</span>
-                          )}
-                        </>
-                      );
-                    })()
-                  }
-                </span>
-              </div>
+                {s}
+                {
+                  // Render command with cursor at caretPos
+                  (() => {
+                    const before = command.slice(0, caretPos);
+                    const after = command.slice(caretPos);
+                    return (
+                      <>
+                        <span>{before}</span>
+                        <span
+                          style={{
+                            display: "inline-block",
+                            backgroundColor: cursorVisible
+                              ? inputColor
+                              : backgroundColor,
+                            color: cursorVisible ? backgroundColor : inputColor,
+                          }}
+                        >
+                          {after.length > 0 ? after[0] : "\u00A0"}
+                        </span>
+                        <span>{after.slice(1)}</span>
+                        {command.length === 0 && (
+                          <span style={{ opacity: 0.5 }}>&nbsp;</span>
+                        )}
+                      </>
+                    );
+                  })()
+                }
+              </span>
             );
           } else {
             return (

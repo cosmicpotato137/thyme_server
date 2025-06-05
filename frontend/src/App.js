@@ -1,6 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import Terminal from "./Terminal";
 
+const welcome_message = `          ________        __       ___   ___ ___
+         /  _____/       / /      /  /  /  //  /
+        /  /____        / /      /  /  /  //  /
+       /  _____/    __ / /__    /  /  /  //  /
+      /  // // /|| /_//   _/   /  /  /  //  /
+     /  // // /__//  / / |    /  /__/  //  /
+    /__//____//_/ ||/_/|_|   /________//__/
+`;
+
 function App() {
   const terminalRef = useRef(null);
   const [screenHeight, setScreenHeight] = useState(window.innerHeight);
@@ -30,7 +39,7 @@ function App() {
         errorColor="red"
         backgroundColor="black"
         barColor="black"
-        msg="Welcome to Terminal.js in React!"
+        msg={welcome_message}
         ref={terminalRef}
         style={{
           height: `${screenHeight - padding * 2}px`,

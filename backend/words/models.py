@@ -21,17 +21,15 @@ class Word(models.Model):
         choices=Languages.choices,
         default=Languages.ENGLISH,
     )
-    difficulty = models.IntegerField(default=0)
     strength = models.IntegerField(default=0)
 
     p = models.FloatField(default=0.0)
-    last_seen = models.DateTimeField(auto_now=True)
+    last_seen = models.DateTimeField(default="1970-01-01T00:00:00Z")
 
     synonyms = models.ManyToManyField(
         "Word",
         symmetrical=True,
         blank=True,
-        through="Synonym",
     )
 
     def __str__(self):
@@ -44,12 +42,4 @@ class Word(models.Model):
 
     class Meta:
         ordering = ["word"]
-        unique_together = [("word", "language"), ("difficulty", "language")]
-
-
-class Synonym(models.Model):
-    word = models.ForeignKey(Word, models.CASCADE, related_name="synonym_words")
-    synonym = models.ForeignKey(Word, models.CASCADE, related_name="synonyms_related")
-
-    class Meta:
-        unique_together = ("word", "synonym")
+        unique_together = [("word", "language")]
