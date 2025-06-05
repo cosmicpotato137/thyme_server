@@ -1,3 +1,5 @@
 # VS Code
 .vscode/
 .env
+log/
+logs/
