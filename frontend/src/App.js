@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Terminal from "./Terminal";
+import Terminal from "./terminal/Terminal";
 
 const welcome_message = `          ________        __       ___   ___ ___
          /  _____/       / /      /  /  /  //  /

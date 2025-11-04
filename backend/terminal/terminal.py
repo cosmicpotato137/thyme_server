@@ -2,6 +2,7 @@ import inspect
 import logging
 import terminal.models as models
 from terminal.input_handler import InputHandler
+import re
 
 
 class Parameter:
@@ -240,7 +241,15 @@ class Terminal(InputHandler):
             return ("Command not found.\n", True)
 
         try:
-            result = self._commands[command](*args, **kwargs)
+            matched_command = None
+            for key in self._commands:
+                # Match the entire command string to the regex pattern of the key
+                if re.fullmatch(key, command):
+                    matched_command = self._commands[key]
+                    break
+            if matched_command is None:
+                return ("Command not found.\n", True)
+            result = matched_command(*args, **kwargs)
             if result == "" or result is None:
                 return ("", True)
             return (result + "\n"), True
